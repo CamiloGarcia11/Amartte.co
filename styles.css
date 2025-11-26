@@ -1,0 +1,599 @@
+/* Importar fuentes y Font Awesome */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+/* Font Awesome se importa en el HTML ahora */
+
+/* --- Estilos Generales y Reset --- */
+:root {
+    --primary-color: #1a1a2e; /* Azul oscuro muy profundo para contraste */
+    --secondary-color: #e94560; /* Rojo/Magenta vibrante para acentos llamativos */
+    --accent-color: #0f3460; /* Azul medio para elementos secundarios */
+    --text-light: #f0f0f0;
+    --text-dark: #1a1a2e;
+    --card-bg: #ffffff;
+    --animation-duration: 0.8s;
+    --animation-delay-increment: 0.1s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: var(--text-light);
+    color: var(--text-dark);
+    overflow-x: hidden; /* Evitar scroll horizontal por animaciones fuera de pantalla */
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* --- Animaciones de Entrada Generales --- */
+/* Estas clases se añadirán a los elementos HTML para animarlos */
+.animate-fade-in {
+    opacity: 0;
+    animation: fadeIn var(--animation-duration) ease-out forwards;
+}
+
+.animate-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp var(--animation-duration) ease-out forwards;
+}
+
+.animate-scale-in {
+    opacity: 0;
+    transform: scale(0.9);
+    animation: scaleIn var(---animation-duration) ease-out forwards;
+}
+
+.animate-slide-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+/* Retrasos para animaciones secuenciales */
+.delay-1 { animation-delay: calc(var(--animation-delay-increment) * 1); }
+.delay-2 { animation-delay: calc(var(--animation-delay-increment) * 2); }
+.delay-3 { animation-delay: calc(var(--animation-delay-increment) * 3); }
+.delay-4 { animation-delay: calc(var(--animation-delay-increment) * 4); }
+.delay-5 { animation-delay: calc(var(--animation-delay-increment) * 5); }
+.delay-6 { animation-delay: calc(var(--animation-delay-increment) * 6); }
+.delay-7 { animation-delay: calc(var(--animation-delay-increment) * 7); }
+.delay-8 { animation-delay: calc(var(--animation-delay-increment) * 8); }
+.delay-9 { animation-delay: calc(var(--animation-delay-increment) * 9); }
+.delay-10 { animation-delay: calc(var(--animation-delay-increment) * 10); }
+.delay-11 { animation-delay: calc(var(--animation-delay-increment) * 11); }
+.delay-12 { animation-delay: calc(var(--animation-delay-increment) * 12); }
+.delay-13 { animation-delay: calc(var(--animation-delay-increment) * 13); }
+
+
+/* --- 1. Barra de Navegación --- */
+.navbar {
+    background: var(--card-bg);
+    color: var(--text-dark);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    /* Efecto de texto brillante */
+    text-shadow: 0 0 5px rgba(233, 69, 96, 0.5);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    font-weight: 600;
+    padding: 5px 0;
+    position: relative;
+    color: var(--primary-color);
+    font-size: 1.05rem;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    display: block;
+    margin-top: 5px;
+    left: 50%; /* Empezar desde el centro */
+    transform: translateX(-50%); /* Centrar */
+    background: var(--secondary-color);
+    transition: width 0.4s ease; /* Animación más suave */
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.cart-icon {
+    position: relative;
+}
+
+.cart-icon i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.cart-icon i:hover {
+    color: var(--secondary-color);
+}
+
+.cart-count {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 0.8rem;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-weight: 600;
+    /* Animación de "rebote" para el contador del carrito */
+    animation: bounce 0.6s ease-in-out infinite alternate;
+}
+
+/* --- 2. Sección Principal / Hero --- */
+.hero-section {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: var(--text-light);
+    text-align: center;
+    padding: 10rem 20px;
+    overflow: hidden; /* Ocultar elementos que salgan del hero */
+    height: 70vh; /* Altura más controlada */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Asegurar que el contenido esté por encima del fondo */
+}
+
+.hero-section h1 {
+    font-size: 4.5rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    line-height: 1.1;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section p {
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+}
+
+.cta-button {
+    background: var(--secondary-color);
+    color: var(--text-light);
+    padding: 1rem 2.5rem;
+    border-radius: 50px; /* Botón más redondeado */
+    font-weight: 700;
+    font-size: 1.2rem;
+    display: inline-block;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 25px rgba(233, 69, 96, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+    position: relative;
+    overflow: hidden; /* Para el efecto de brillo */
+}
+
+.cta-button:hover {
+    background: #c73a50; /* Un poco más oscuro al pasar el cursor */
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(233, 69, 96, 0.6);
+}
+
+/* Efecto de brillo en el botón CTA */
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.7s ease;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+/* Fondo animado para el Hero Section: Partículas/Burbujas */
+.hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none; /* Asegurar que no interfiera con el contenido */
+}
+
+.hero-bg-overlay::before {
+    content: '';
+    position: absolute;
+    width: 200%; /* Cubrir un área más grande */
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+    animation: rotateBackground 60s linear infinite; /* Rotación lenta */
+    transform-origin: center center;
+}
+
+/* Podemos añadir más partículas con ::after si queremos */
+.hero-bg-overlay::after {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.03) 0%, transparent 60%);
+    animation: rotateBackgroundReverse 40s linear infinite;
+    transform-origin: top left;
+}
+
+
+/* --- 3. Sección de Productos Destacados --- */
+.featured-products {
+    padding: 6rem 5%;
+    text-align: center;
+    background-color: var(--background-light);
+}
+
+.featured-products h2 {
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+/* Efecto de subrayado animado para el título de la sección */
+.featured-products h2::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+    bottom: -15px;
+    left: 20%;
+    border-radius: 2px;
+    animation: expandUnderline 1.5s ease-out forwards;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+    overflow: hidden; /* Para el borde brillante */
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Efecto de borde brillante al pasar el cursor */
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color), var(--secondary-color));
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.product-card:hover::before {
+    opacity: 0.7;
+}
+
+
+.product-image {
+    background: linear-gradient(45deg, #f0e6f6, #d7e4f2); /* Fondo de gradiente suave */
+    height: 350px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden; /* Asegurar que la imagen no se salga */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* Animación de zoom sutil al pasar el cursor sobre la imagen */
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.08);
+}
+
+
+.product-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.price {
+    color: var(--secondary-color);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+.add-to-cart {
+    background: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    width: 80%; /* Más estrecho que antes */
+    max-width: 250px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart:hover {
+    background: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(233, 69, 96, 0.4);
+}
+
+/* Efecto de brillo de "estrella" en el botón al hacer click/hover */
+.btn-shine::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+    z-index: 0;
+}
+
+.btn-shine:hover::before {
+    width: 200px;
+    height: 200px;
+    opacity: 1;
+}
+
+/* --- 4. Pie de Página --- */
+.footer {
+    background: var(--primary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: 2.5rem 5%;
+    font-size: 1rem;
+    border-top: 5px solid var(--accent-color); /* Borde superior para separar */
+}
+
+.footer p {
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-icon {
+    color: var(--text-light);
+    margin: 0 15px;
+    font-size: 1.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+    color: var(--secondary-color);
+    transform: translateY(-5px) scale(1.1);
+}
+
+
+/* --- Media Queries para Responsividad --- */
+@media (max-width: 992px) {
+    .hero-section h1 {
+        font-size: 3.5rem;
+    }
+    .hero-section p {
+        font-size: 1.3rem;
+    }
+    .featured-products h2 {
+        font-size: 2.5rem;
+    }
+    .product-grid {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem 20px;
+    }
+    .logo {
+        margin-bottom: 10px;
+    }
+    .nav-links {
+        margin-top: 10px;
+        flex-direction: column;
+    }
+    .nav-links li {
+        margin: 8px 0;
+    }
+    .cart-icon {
+        margin-top: 15px;
+    }
+    .hero-section {
+        padding: 6rem 20px;
+        height: 60vh;
+    }
+    .hero-section h1 {
+        font-size: 2.8rem;
+    }
+    .hero-section p {
+        font-size: 1.1rem;
+    }
+    .cta-button {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+    .featured-products h2 {
+        font-size: 2rem;
+    }
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .product-card {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+    .hero-section p {
+        font-size: 1rem;
+    }
+    .logo {
+        font-size: 1.5rem;
+    }
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+    .cart-icon i {
+        font-size: 1.5rem;
+    }
+    .featured-products h2 {
+        font-size: 1.8rem;
+    }
+    .product-card h3 {
+        font-size: 1.4rem;
+    }
+    .price {
+        font-size: 1.3rem;
+    }
+    .add-to-cart {
+        font-size: 0.95rem;
+        padding: 10px 15px;
+    }
+}
+
+
+/* --- Keyframes (Animaciones CSS) --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(100px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes rotateBackground {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotateBackgroundReverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+}
+
+@keyframes expandUnderline {
+    from { width: 0%; left: 50%; transform: translateX(-50%); }
+    to { width: 60%; left: 20%; transform: translateX(0); }
+}
